@@ -9,69 +9,60 @@ class BasePage:
         self.driver = driver
         self.url = url
 
-
     def open(self):
         self.driver.get(self.url)
 
-
-    def element_is_visible(self, locator):
+    def is_visible(self, locator):
         return wait(self.driver, 10).until(EC.visibility_of_element_located(locator))
 
-    def element_are_visible(self, locator):
+    def are_visible(self, locator):
         return wait(self.driver, 10).until(EC.visibility_of_all_elements_located(locator))
 
-    def element_is_present(self, locator):
+    def is_present(self, locator):
         return wait(self.driver, 10).until(EC.presence_of_element_located(locator))
 
-    def element_are_present(self, locator):
+    def are_present(self, locator):
         return wait(self.driver, 10).until(EC.presence_of_all_elements_located(locator))
 
-    def element_is_not_visible(self, locator):
+    def is_not_visible(self, locator):
         return wait(self.driver, 10).until(EC.invisibility_of_element_located(locator))
 
-    def element_is_clickable(self, locator):
+    def is_clickable(self, locator):
         return wait(self.driver, 10).until(EC.element_to_be_clickable(locator))
-
-
-
-
 
     def go_to_element(self, element):
         self.driver.execute_script("return arguments[0].scrollIntoView(true);", element)
         # self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
-    def action_double_click(self, element):
+    def double_click(self, element):
         action = ActionChains(self.driver)
         action.double_click(element)
         action.perform()
 
-    def action_right_click(self, element):
+    def right_click(self, element):
         action = ActionChains(self.driver)
         action.context_click(element)
         action.perform()
 
-    def remove_footer(self):
-        self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
-        self.driver.execute_script('document.getElementById("fixedban").style.display="none";')
 
-    def action_drag_and_drop_by_offset(self, element, x_coords, y_coords):
+
+    def drag_and_drop_by_offset(self, element, x_coords, y_coords):
         action = ActionChains(self.driver)
         action.drag_and_drop_by_offset(element, x_coords, y_coords)
         action.perform()
 
-    def action_drag_and_drop_to_element(self, what, where):
+    def drag_and_drop(self, what, where):
         action = ActionChains(self.driver)
         action.drag_and_drop(what, where)
         action.perform()
 
-
-
-
-    def action_move_to_element(self, element):
+    def move_to_element(self, element):
         action = ActionChains(self.driver)
         action.move_to_element(element)
         action.perform()
 
-
     def window_stop(self):
         self.driver.execute_script("window.stop();")
+
+
+
